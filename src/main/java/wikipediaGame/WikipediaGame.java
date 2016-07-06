@@ -3,6 +3,8 @@ package wikipediaGame;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.time.ZonedDateTime;
+import java.time.temporal.ChronoUnit;
 import java.util.HashSet;
 import java.util.PriorityQueue;
 import java.util.Scanner;
@@ -81,8 +83,9 @@ public class WikipediaGame {
 			endArticle = new Article(Integer.MAX_VALUE, null, endArticleURL);
 			
 			startArticle = new Article(0, null, startArticleURL);
-
+			
 			runSearch();
+			
 		}
 
 		reader.close();
@@ -92,6 +95,8 @@ public class WikipediaGame {
 	 * Run breadth-first search until the end article is found.
 	 */
 	public static void runSearch(){
+		
+		ZonedDateTime now = ZonedDateTime.now();
 
 		Article currentArticle = null;
 		
@@ -125,6 +130,10 @@ public class WikipediaGame {
 		System.out.println("Connected to a total of " + accessedWikiArticles + 
 				" Wikipedia article(s) during this search and used " + usedCachedWikiArticles +
 				" cached article(s).");
+		
+		long seconds = now.until(ZonedDateTime.now(), ChronoUnit.MILLIS);
+		
+		System.out.println("Search ran in " + seconds + " miliseconds.");
 		
 		System.out.println("\n----------------------------------------"
 				+ "-------------------------------------------------\n");
